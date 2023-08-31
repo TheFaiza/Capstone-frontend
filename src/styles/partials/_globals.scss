@@ -1,0 +1,163 @@
+@use './mixins' as *;
+@use './colors' as *;
+@use './fonts' as *;
+
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: TitilliumWeb,sans-serif;
+
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+    color:unset;
+}
+
+
+
+
+
+h1 {
+    font-size:1.75rem;
+    font-weight:600;
+    line-height:2.25rem;
+
+    @include tablet {
+        font-size:2rem;
+        font-weight:600;
+        line-height: 2.5rem;
+    }
+}
+
+h2 {
+    font-size:1.25rem;
+    font-weight:600;
+    line-height:1.75rem;
+
+    @include tablet {
+        font-size:1.5rem;
+        font-weight:600;
+        line-height:2rem;
+    }
+}
+
+h3, label, button, a {
+    font-size:0.8125rem;
+    font-weight: 600;
+    line-height:1.25rem;
+
+    @include tablet {
+        font-size:0.875rem;
+        line-height:1.75rem;
+    }
+}
+
+h4 {
+    font-size:0.6875rem;
+    font-weight:normal;
+    line-height:1rem;
+
+    @include tablet {
+        font-size:0.75rem;
+        line-height: 1.125rem;
+    }
+}
+
+input[type="text"], 
+input[type="email"],
+textarea, 
+select{
+    outline:none;
+    border-radius: 1.25rem;
+    border:1px solid $Cloud;
+    height: 2.25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include tablet {
+        height: 2.375rem;
+    }
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus,
+textarea:focus, 
+select:focus {
+    border: 1px solid $Instock-Indigo;
+}
+
+
+
+
+button {
+    height: 2.25rem;
+    border-radius: 1.25rem;
+    border:none;
+    padding-left:1rem;
+    padding-right:1rem;
+    width: 7.5rem;
+
+    @include tablet {
+        height: 2.375rem;
+        width:unset;
+    }
+
+}
+
+.button {
+
+    &__primary {
+        background-color: $Instock-Indigo;
+        color:white;
+
+        &:hover {
+            background-color: $Graphite;
+            cursor:pointer;
+        }
+    }
+
+    &__secondary {
+        background-color: white;
+        border:1px solid $Cloud;
+
+        &:hover {
+            border-color: $Instock-Indigo;
+            color: $Instock-Indigo;
+            cursor:pointer;
+        }
+    }
+
+    &__delete {
+        background-color: $Red;
+
+        &:hover{
+            background-color: $Graphite;
+            cursor:pointer;
+        }
+    }
+}
+
+.page-wrapper {
+    width: 85%;
+    margin-left: auto;
+    margin-right:auto;
+    background:white;
+    top: -5.25rem;
+    position:relative;
+
+    @include tablet {
+        position:relative;
+        top: -5.25rem;
+        z-index: 2;
+    }
+}

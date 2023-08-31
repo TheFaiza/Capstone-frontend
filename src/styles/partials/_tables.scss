@@ -1,0 +1,336 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles//partials/colors' as *;
+
+tr {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @include tablet {
+        display: table-row;
+    }
+}
+
+td {
+    display: block;
+    width: 50%;
+
+    @include tablet {
+        display: table-cell;
+        width: unset;
+    }
+}
+
+
+
+.table {
+    width: 100%;
+    border-spacing: 0px;
+
+    &__row {
+        background-color: $Light-Grey;
+    }
+
+    &__head {
+        text-align: left;
+        display: none;
+
+        @include tablet {
+            display: table-header-group;
+        }
+    }
+
+
+    &__header {
+        margin: 0;
+        border-spacing: 0;
+        width: fit-content;
+
+        @include tablet {
+            width: auto;
+            display: table-row-group;
+        }
+
+        &-title {
+            color: $Slate;
+        }
+
+        &-sort {
+            height: 1rem;
+        }
+
+        &-inventory-item {
+            padding-left: 24px;
+
+            @include desktop {
+                width: 30%;
+                padding-left: 60px;
+            }
+        }
+
+        &-warehouse-item {
+            padding-left: 24px;
+
+            @include desktop {
+                padding-left: 60px;
+            }
+        }
+
+        &-container {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            margin: 0;
+        }
+
+        &-category {
+
+            @include tablet {
+                width: 15%
+            }
+        }
+
+        &-status {
+
+            @include tablet {
+                width: 20%
+            }
+        }
+
+        &-quantity {
+            @include tablet {
+                width: 23%
+            }
+        }
+
+        &-actions {
+
+            @include tablet {
+                display: flex;
+                align-items: center;
+                text-align: right;
+                width: fit-content;
+                margin: auto;
+            }
+        }
+
+    }
+
+    &__body {
+        &-items {
+            display: flex;
+
+            @include tablet {
+                display: table-row;
+            }
+        }
+
+        &-idlink {
+            display: flex;
+            align-items: center;
+        }
+
+        &-name {
+            align-items: center;
+            color: $Instock-Indigo;
+            border-top: $border;
+            padding: 16px 0 0 16px;
+            order: 1;
+
+            @include tablet {
+                border-top: none;
+                border-bottom: $border;
+                padding: 0 0 0 24px;
+            }
+
+            @include desktop {
+                padding-left: 60px;
+            }
+
+            :hover {
+                cursor: pointer;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-contact {
+            padding: 1rem 0 0 1rem;
+            order: 3;
+
+            @include tablet {
+                border-top: none;
+                border-bottom: $border;
+                padding: 0;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-category {
+            padding: 1rem 0 0 1rem;
+            border-top: $border;
+            order: 3;
+
+            &--inv {
+                border: none;
+            }
+
+            @include tablet {
+                border-top: none;
+                border-bottom: $border;
+                padding: 0;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-container {
+            width: fit-content;
+            border-radius: 15px;
+            padding: 3px 3.5px;
+        }
+
+        &-status {
+            border-top: $border;
+            order: 2;
+            padding: 16px 16px 0 0;
+
+            @include tablet {
+                border-top: 0rem;
+                border-bottom: $border;
+                padding: 0 24px 0 0;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-quantity {
+            order: 4;
+            padding: 1rem 1rem 0 0;
+
+            @include tablet {
+                border-top: none;
+                border-bottom: $border;
+                padding: 0 24px 0 0;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-empty {
+            order: 5;
+
+            @include tablet {
+                display: none;
+            }
+        }
+
+        &-warehouse {
+            order: 6;
+
+            @include tablet {
+                padding: 0 24px 0 0;
+                border: none;
+                border-bottom: $border;
+            }
+
+            &-title {
+                color: $Slate;
+
+                @include tablet {
+                    display: none;
+                }
+            }
+        }
+
+        &-actions {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            order: 7;
+            padding: 1rem;
+
+            @include tablet {
+                border-top: none;
+                border-bottom: $border;
+                padding: 1rem 1.5rem;
+
+            }
+
+            &-title {
+                display: none;
+            }
+        }
+
+        &-actionsbox {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include tablet {
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+
+        &-arrow {
+            position: relative;
+
+
+            &:hover {
+                left: 4px;
+            }
+        }
+    }
+
+    &__links {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.in-stock {
+    color: $Green;
+    background-color: #eef6f4;
+    font-size: 0.75rem;
+}
+
+.out-of-stock {
+    color: $Red;
+    background-color: #fbf2ee;
+    font-size: 0.75rem;
+}

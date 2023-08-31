@@ -1,0 +1,84 @@
+@use "../../styles//partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.header-wrapper {
+  background-color: #5e33ff;
+}
+
+.header {
+  padding: 10px 15px;
+  background-color: #5e33ff;
+
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin:auto;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 80px;
+        height: 80px;
+        border-radius: 15%;
+      }
+    }
+    .back-btn {
+      button {
+        background: none;
+        padding: 0px;
+        font-size: 30px;
+        font-weight: 7px;
+      }
+    }
+
+    // &__link {
+    //   color: $Cloud;
+    //   border-radius: 20px;
+    //   width: 10.3125rem;
+    //   text-align: center;
+    //   background-color: transparent;
+    //   height: 2.25rem;
+    //   padding-left: 1rem;
+    //   padding-right: 1rem;
+    //   border-radius: 1.25rem;
+    //   padding-top: 0.4rem;
+    //   text-decoration: none;
+
+
+
+    //   &--active {
+    //     color: $White !important;
+    //     background-color: $Instock-Black;
+    //     text-decoration: none;
+    //     width: 10.3125rem;
+
+    //     @include tablet {
+    //       padding-top: 0.2rem;
+    //     }
+
+    //   }
+
+    //   &:hover {
+    //     color: $White;
+    //     cursor: pointer;
+    //     background-color: transparent;
+    //   }
+
+    //   &-wrapper {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    //     margin-top: 1rem;
+
+    //     @include tablet {
+    //       gap: 1rem;
+    //       margin: 0;
+    //     }
+    //   }
+    // }
+}
