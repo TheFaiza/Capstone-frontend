@@ -1,0 +1,18 @@
+@use "../../styles//partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.TableHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+        font-size: 20px;
+        padding: 0 0 10px;
+    }
+
+}
+.primary-btn {
+    cursor: pointer;
+    background: $Green;
+    color: $White;
+}

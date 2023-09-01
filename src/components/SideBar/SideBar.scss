@@ -1,0 +1,46 @@
+@use "../../styles//partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.sidebar {
+    width: 240px;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: $Light-Grey;
+    padding: 0px;
+    display: flex;
+  flex-direction: column;
+    
+  }
+  ul.sidebar-links {
+    display: block;
+    padding: 0;
+    margin: 0;
+    li {
+      display: block;
+      a {
+        padding: 10px 15px;
+        display: block;
+        font-size: 15px;
+        border-bottom: 1px solid $Cloud;
+        &.active {
+          background: $White;
+        }
+      }
+     
+    }
+  }
+  .logout-link {
+    display: flex;
+    justify-content: start;
+    margin-top: auto;
+    a {
+      background: $Cloud;
+      color: $Instock-Black;
+      padding: 5px 15px;
+      font-size: 15px;
+      display: block;
+      width: 100%;
+    }
+  }

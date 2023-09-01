@@ -1,3 +1,17 @@
 @use './styles/partials/globals' as *;
 @use './styles/partials/tables' as *;
 
+.dashboard-holder {
+    max-width: initial;
+    margin: 0 auto;
+    padding: 0 0px;
+  }
+  .dashboard-holder.flex {
+    display: flex;
+    justify-content: start;
+  }
+
+  .content-holder {
+    flex-grow: 1;
+    padding: 15px 20px;
+  }

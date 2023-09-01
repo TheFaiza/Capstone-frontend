@@ -1,13 +1,13 @@
-@use "../../styles//partials/colors" as *;
-@use "../../styles/partials/mixins" as *;
+@use "../../../styles/partials/colors" as *;
+@use "../../../styles/partials/mixins" as *;
 
-.pageHolder {
-    padding: 0 15px;
-    
+.students-holder {
+
 }
+
 .form-holder {
-    max-width: 480px;
-    margin: 70px auto;
+    max-width: 640px;
+    margin: 0px auto !important;
     background: #f2f2f2;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -81,64 +81,3 @@ ul.login-links {
     }
 }
 
-.radios {
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
- .radios input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-.checkmark {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: $White;
-    border-radius: 50%;
-    border: 1px solid $Instock-Black;
-
-  }
-  
-  .radios:hover input ~ .checkmark {
-    background-color: $Cloud;
-    border: 1px solid $Instock-Black;
-  }
-  
-  .radios input:checked ~ .checkmark {
-    background-color: $Instock-Indigo;
-    border: 1px solid $Instock-Indigo
-
-  }
-  
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  .radios input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  .radios .checkmark:after {
-       top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: white;
-  }
-  

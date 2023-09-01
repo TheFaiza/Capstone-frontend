@@ -1,0 +1,42 @@
+/* Table Styles */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  /* Table Header Styles */
+  .data-table thead {
+    background-color: #333;
+    color: white;
+  }
+  
+  .data-table th {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  /* Alternating Row Background Colors */
+  .data-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .data-table tbody tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  /* Button Styles */
+  .data-table button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .data-table button:hover {
+    text-decoration: underline;
+  }
+.data-table td {
+    text-align: left;
+    vertical-align: middle;
+}  
