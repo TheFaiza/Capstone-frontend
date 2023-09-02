@@ -1,42 +1,178 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Students.scss";
+import { Formik, Form, useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
 
 
 
-const CrudComponent = () => {
+
+const CrudComponent = (props) => {
+    
+    const formik = useFormik({
+        initialValues: {
+            name: "",
+            email: "",
+            password: "",
+            mobile: "",
+            user_type: "Student",
+            address: "",
+            country: "",
+            city: ""
+        },
+        validationSchema: Yup.object().shape({
+            name: Yup.string()
+              .required(`Required`),
+            email: Yup.string()
+              .email(`Invalid email address`)
+              .required(`Required`),
+            password: Yup.string()
+              .min(6)
+              .required(`Required`)
+        }),
+        onSubmit: async (values, { setSubmitting  }) => {
+            try {
+                await axios.post(`http://localhost:4200/students`, values)
+                .then((response) => {
+                    const newStudent = {...response.data};
+                    props.refreshList(newStudent);
+                })
+                const newSettings ={
+                    crudMode: "",
+                    isCrudStart: false,
+                    showBtn: true,
+                }
+                props.updateSettings(newSettings);
+            } catch (error) {
+                console.error(`Error posting students data`, values);
+            } finally {
+                setSubmitting(false);
+            }
+        }
+
+    })
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await axios.get(`http://localhost:4200/students?id=${props.idToEdit}`) ;
+    //         const responseData = response.data[0];
+    //         formik.setValues(responseData);
+    //     }
+    //     fetchData();
+    // }, [props.idToEdit])
+
+      
 
     return(
-        <div className="form-holder">
-            <form action="" method="">
+        <div className="students-holder">
+
+            <div className="form-holder">
+                <form onSubmit={formik.handleSubmit}>
                 <h2>Please provide student information!</h2>
-                <div className="form-row">
-                    <input 
-                        type="text" 
-                        placeholder="First Name" 
-                        className="input-field" 
-                    />
-                </div>
-                <div className="form-row">
-                    <input 
-                        type="email" 
-                        placeholder="Last Name" 
-                        className="input-field" 
-                    />
-                </div>
-                <div className="form-row">
+                <div className="flex">
+                    <div className="form-row">
+                        <input 
+                            type="text" 
+                            placeholder="Name" 
+                            className="input-field"
+                            name="name"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur} 
+                            value={formik.values.name} 
+                        />
+                        {formik.errors.name && formik.touched.name &&  
+                            <div className="error">{formik.errors.name}</div>
+                        }
+                        
+                    </div>
+                    <div className="form-row">
                     <input 
                         type="email" 
                         placeholder="Email" 
-                        className="input-field" 
+                        className="input-field"
+                        name="email"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email} 
+                    />
+                    {formik.errors.email && formik.touched.email && 
+                        <div className="error">{formik.errors.email}</div>
+                    }
+                </div>
+                </div>
+                <div className="flex">
+                    <div className="form-row">
+                        <input 
+                            type="text" 
+                            placeholder="Password" 
+                            className="input-field"
+                            name="password"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.password} 
+                        />
+                        {formik.errors.password && formik.touched.password && 
+                            <div className="error">{formik.errors.password}</div>
+                        }
+                    </div>
+                    <div className="form-row">
+                        <input 
+                            type="text" 
+                            placeholder="Mobile" 
+                            className="input-field"
+                            name="mobile" 
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.mobile}
+                        />
+                    </div>
+                </div>
+                <div className="flex">
+                    <div className="form-row">
+                        <input 
+                            type="text" 
+                            placeholder="Country" 
+                            className="input-field"
+                            name="country"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.country} 
+                        />
+                    </div>
+                    <div className="form-row">
+                        <input 
+                            type="text" 
+                            placeholder="City" 
+                            className="input-field"
+                            name="city"
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.city} 
+                        />
+                    </div>
+                </div>
+                <div className="form-row">
+                    <textarea
+                    className="text-area"
+                    placeholder="Address"
+                    name="address"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.address}
+                    ></textarea>
+                </div>
+                <div className="form-row">
+                    <input 
+                        type="hidden"
+                        name="user_type" 
+                        value={formik.values.user_type}
                     />
                 </div>
-                
-                
                 <div className="form-row">
-                    <button className="submit-btn">Submit</button>
+                    <input type="submit" value={'Submit'} className="submit-btn" />
                 </div>
-            </form>       
-         </div>
+           </form>   
+            </div>
+          </div>
     )
 }
 

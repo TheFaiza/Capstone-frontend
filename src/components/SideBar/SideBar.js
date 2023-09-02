@@ -7,17 +7,17 @@ const SideBar = () => {
     <div className="sidebar">
       <ul className='sidebar-links'>
         <li>
-          <NavLink to="/" activeClassName="active-link" exact>
+          <NavLink to="/" activeclassname="active" exact="true">
             Student
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/courses" activeClassName="active-link">
+          <NavLink to="/dashboard/courses" activeclassname="active">
             Course
           </NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/grades" activeClassName="active-link">
+          <NavLink to="/dashboard/grades" activeclassname="active">
             Grades
           </NavLink>
         </li>

@@ -3,10 +3,8 @@
 
 .students-holder {
 
-}
-
 .form-holder {
-    max-width: 640px;
+    max-width: 740px;
     margin: 0px auto !important;
     background: #f2f2f2;
     border: 1px solid #ccc;
@@ -18,9 +16,16 @@
         margin: 0px;
     }
 }
-
+.flex {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 15px;
+}
 .form-row {
     padding: 0 0 15px;
+    box-sizing: border-box;
+    width: 50%;
     &.links {
         display: flex;
         gap: 10px;
@@ -51,21 +56,32 @@
     box-sizing: border-box;
     width: 100%;
     padding: 10px 15px;
-    border-radius: 15px !important;
+    border-radius: 5px !important;
+    border:1px solid #BDC5D5;
+}
+.text-area {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    height: 100px;
+    resize:  none;
+    border-radius: 5px !important;
     border:1px solid #BDC5D5;
 }
 .submit-btn {
     background: $Instock-Indigo;
-    padding: 7px 30px;
+    padding: 10px 30px;
     height: initial;
     width: initial;
     font-size: 16px;
     border-radius: 25px;
     color: $White;
+    border: none;
     cursor: pointer;
     &:hover {
         background: $Cloud;
         color: $Instock-Black;
+        border: none;
     }
 }
 ul.login-links {
@@ -81,3 +97,4 @@ ul.login-links {
     }
 }
 
+}
