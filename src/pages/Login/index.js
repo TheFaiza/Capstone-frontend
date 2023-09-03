@@ -11,12 +11,12 @@ const Login = () => {
 
       const formik = useFormik({
         initialValues: {
-          userName: "",
+          userEmail: "",
           password: "",
           user_type: "",
         },
         validationSchema: Yup.object({
-          userName: Yup.string()
+            userEmail: Yup.string()
             .required('Required'),
           password: Yup.string()
             .required('Required'),
@@ -34,7 +34,7 @@ const Login = () => {
       const handleLogin = async() => {
         if(formik.values.user_type === "Admin"){
             try {
-                const response = await axios.get(`http://localhost:4200/admins?username=${formik.values.userName}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
+                const response = await axios.get(`http://localhost:4000/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
                 
                 if(response.data.length > 0) {
 
@@ -43,7 +43,7 @@ const Login = () => {
                     navigate('/admin');
                 }
                 else {
-                    setErrorMsg("username or password is not correct");
+                    setErrorMsg("User Email or password is not correct");
                     localStorage.removeItem('user');
                     setInterval(() => {
                         setErrorMsg(""); 
@@ -56,7 +56,7 @@ const Login = () => {
         }
         if(formik.values.user_type === "Student") {
             try {
-                const response = await axios.get(`http://localhost:4200/students?name=${formik.values.userName}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
+                const response = await axios.get(`http://localhost:4000/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
                 
                 if(response.data.length > 0) {
 
@@ -67,7 +67,7 @@ const Login = () => {
                     navigate('/student');
                 }
                 else {
-                    setErrorMsg("username or password is not correct");
+                    setErrorMsg("User Email or password is not correct");
                     localStorage.removeItem('user');
                     setInterval(() => {
                         setErrorMsg(""); 
@@ -94,15 +94,15 @@ const Login = () => {
                     <div className="form-row">
                         <input 
                             type="text" 
-                            placeholder="User Name" 
+                            placeholder="User Email" 
                             className="input-field"
-                            name="userName"
+                            name="userEmail"
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.userName}
+                            value={formik.values.userEmail}
                         />
-                        {formik.touched.userName && formik.errors.userName ? (
-                            <div className="error">{formik.errors.userName}</div>
+                        {formik.touched.userEmail && formik.errors.userEmail ? (
+                            <div className="error">{formik.errors.userEmail}</div>
                         ) : null}
                     </div>
                     <div className="form-row">
