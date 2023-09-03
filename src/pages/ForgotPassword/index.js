@@ -18,7 +18,7 @@ const ForgotPassword = () => {
                     
                     <div className="form-row">
                         <ul className="login-links">
-                            <li><span>Back to login screen!</span><Link to="/login">Login</Link></li>
+                            <li><span>Back to login screen!</span><Link to="/">Login</Link></li>
                         </ul>
                         
                     </div>

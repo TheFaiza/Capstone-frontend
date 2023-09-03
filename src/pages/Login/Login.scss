@@ -1,10 +1,10 @@
 @use "../../styles//partials/colors" as *;
 @use "../../styles/partials/mixins" as *;
 
-.pageHolder {
+.login-holder {
     padding: 0 15px;
     
-}
+
 .form-holder {
     max-width: 480px;
     margin: 70px auto;
@@ -56,12 +56,13 @@
 }
 .submit-btn {
     background: $Instock-Indigo;
-    padding: 7px 30px;
+    padding: 10px 30px;
     height: initial;
     width: initial;
     font-size: 16px;
     border-radius: 25px;
     color: $White;
+    border: none;
     cursor: pointer;
     &:hover {
         background: $Cloud;
@@ -141,4 +142,4 @@ ul.login-links {
       border-radius: 50%;
       background: white;
   }
-  
+}

@@ -70,7 +70,7 @@ const Register = () => {
                     </div>
                     <div className="form-row">
                         <ul className="login-links">
-                            <li><span>Already have an account?</span><Link to="/login">Login</Link></li>
+                            <li><span>Already have an account?</span><Link to="/">Login</Link></li>
                         </ul>
                         
                     </div>

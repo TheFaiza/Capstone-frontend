@@ -4,6 +4,7 @@ import DataTable from "../../DataTable/DataTable";
 import TableHeader from "../../TableHeader/TableHeader";
 import CrudComponent from "./CrudComponent";
 import axios from "axios";
+import DeleteModal from "../../DeleteModal";
 
 
 
@@ -55,6 +56,11 @@ const Students = () => {
         btnText: "Add Student",
         showBtn: true,
     });
+    const [dataList, setDataList] = useState([]);
+    const [idToEdit, setIdToEdit] = useState();
+    const [idToDelete, setIdToDelete] = useState();
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+
     const crudStart = () => {
         setSettings({
             ...settings,
@@ -70,29 +76,24 @@ const Students = () => {
             isCrudStart: false,
             showBtn: true
         })
+        refreshList();
+        setIdToEdit("");
+        setIdToDelete("");
     }
-    const [dataList, setDataList] = useState([]);
+
+    const refreshList = async () => {
+        try {
+           const response = await axios.get(`http://localhost:4200/students`);
+           setDataList(response.data);
+        } catch (e) {
+           console.log(`problem refreshing list`+e); 
+        }
+    }
+
     useEffect(()=> {
-        axios.get(`http://localhost:4200/students`)
-        .then((response) => {
-            setDataList(response.data) 
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-          });
+        refreshList();
     }, []);
 
-    const updateSettings = (newSettings) => {
-        setSettings({
-          ...settings,
-          ...newSettings,
-        });
-    };
-
-    const refreshList = (newStudent) => {
-        setDataList([...dataList, newStudent]); 
-    };
-    const [idToEdit, setIdToEdit] = useState();
     const handleEdit = (row) => {
         setSettings({
             ...settings,
@@ -100,12 +101,19 @@ const Students = () => {
             isCrudStart: true,
             showBtn: false
         });
-        setIdToEdit(row.values.id);
-    }
-    const handleDelete = (row) => {
-        console.log(row)
+        setIdToEdit(row.original.id)
     }
 
+    const handleDelete = (row) => {
+        setIsDeleteModalVisible(true);
+        setIdToDelete(row.original.id);
+    }
+    const onDelete = (confirm)=> {
+        setIsDeleteModalVisible(confirm);
+    }
+    const handleCancel = () => {
+        setIsDeleteModalVisible(false);
+    };
    
    
     return(
@@ -126,9 +134,8 @@ const Students = () => {
             {settings.isCrudStart ? (
                 <>
                     <CrudComponent 
-                        updateSettings={updateSettings}
-                        refreshList={refreshList}
-                        idToEdit={idToEdit}
+                      closeCrud={closeCrud}
+                      idToEdit={idToEdit}  
                     />
                 </>
             ) : (
@@ -138,6 +145,16 @@ const Students = () => {
                         columns={columns}
                     />
                 </div>
+            )}
+            {isDeleteModalVisible && (
+                <DeleteModal 
+                    handleCancel={handleCancel}
+                    handleDelete={handleDelete}
+                    itemToDelete={idToDelete}
+                    onDelete={onDelete}
+                    closeCrud={closeCrud}
+                    api_endpoint={`students`}
+                />
             )}
             
         </div>

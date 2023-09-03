@@ -31,37 +31,51 @@ const CrudComponent = (props) => {
               .required(`Required`)
         }),
         onSubmit: async (values, { setSubmitting  }) => {
-            try {
-                await axios.post(`http://localhost:4200/students`, values)
-                .then((response) => {
-                    const newStudent = {...response.data};
-                    props.refreshList(newStudent);
-                })
-                const newSettings ={
-                    crudMode: "",
-                    isCrudStart: false,
-                    showBtn: true,
+            if(editCrud === "update") {
+                try {
+                    await axios.put(`http://localhost:4200/students/${props.idToEdit}`, values)
+                    .then((response) => {
+                        props.closeCrud();
+                    })
+                } catch (error) {
+                    console.error(`Error posting students data`, values);
+                } finally {
+                    setSubmitting(false);
                 }
-                props.updateSettings(newSettings);
-            } catch (error) {
-                console.error(`Error posting students data`, values);
-            } finally {
-                setSubmitting(false);
             }
+            else {
+                try {
+                    await axios.post(`http://localhost:4200/students`, values)
+                    .then((response) => {
+                        props.closeCrud();
+                    })
+                } catch (error) {
+                    console.error(`Error posting students data`, values);
+                } finally {
+                    setSubmitting(false);
+                }
+            }
+            
         }
-
     })
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await axios.get(`http://localhost:4200/students?id=${props.idToEdit}`) ;
-    //         const responseData = response.data[0];
-    //         formik.setValues(responseData);
-    //     }
-    //     fetchData();
-    // }, [props.idToEdit])
 
-      
+    const [editCrud, setEditCrud] = useState("");
+    const getEditData = async() => {
+        try {
+            const update = await axios.get(`http://localhost:4200/students?id=${props.idToEdit}`);
+            formik.setValues(update.data[0]);
+            setEditCrud("update");
+        } catch (e) {
+            console.log(`Data was not fetched properly${e}`);
+        }
+    }
 
+    useEffect(() => {
+        if(props.idToEdit) {
+            getEditData();
+        }
+    }, [])
+   
     return(
         <div className="students-holder">
 

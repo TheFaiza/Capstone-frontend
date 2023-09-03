@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import "./Courses.scss";
+import "./Grades.scss";
 import DataTable from "../../DataTable/DataTable";
 import TableHeader from "../../TableHeader/TableHeader";
 import CrudComponent from "./CrudComponent";
 import axios from "axios";
 import DeleteModal from "../../DeleteModal";
 
-const Courses = () => {
+const Grades = () => {
 
     const columns = [
         {
@@ -18,12 +18,12 @@ const Courses = () => {
             accessor: "name"
         },
         {
-            Header: "Code",
-            accessor: "code"
+            Header: "Min Value",
+            accessor: "min_val"
         },
         {
-            Header: "Description",
-            accessor: "description"
+            Header: "Max Value",
+            accessor: "max_val"
         },
         {
             Header: 'Actions',
@@ -40,7 +40,7 @@ const Courses = () => {
     const [settings, setSettings] = useState({
         crudMode: "",
         isCrudStart: false,
-        btnText: "Add Course",
+        btnText: "Add Grade",
         showBtn: true,
     });
     const [dataList, setDataList] = useState([]);
@@ -70,7 +70,7 @@ const Courses = () => {
 
     const refreshList = async () => {
         try {
-           const response = await axios.get(`http://localhost:4200/courses`);
+           const response = await axios.get(`http://localhost:4200/grades`);
            setDataList(response.data);
         } catch (e) {
            console.log(`problem refreshing list`+e); 
@@ -107,10 +107,10 @@ const Courses = () => {
             <TableHeader 
                 HeadingTxt={
                     settings.crudMode === "create" 
-                    ? 'Add Course'
+                    ? 'Add Grade'
                     : settings.crudMode === "update"
-                    ? 'Update Course'
-                    : 'Courses' 
+                    ? 'Update Grade'
+                    : 'Grades' 
                 }
                 showAddBtn={settings.showBtn}
                 crudStart={crudStart}
@@ -139,7 +139,7 @@ const Courses = () => {
                     itemToDelete={idToDelete}
                     onDelete={onDelete}
                     closeCrud={closeCrud}
-                    api_endpoint={`courses`}
+                    api_endpoint={`grades`}
                 />
             )}
         </div>
@@ -148,4 +148,4 @@ const Courses = () => {
 
 }
 
-export default Courses;
+export default Grades;
