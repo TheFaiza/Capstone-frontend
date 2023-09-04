@@ -9,6 +9,8 @@ import axios from "axios";
 
 const Login = () => {
 
+    localStorage.clear();
+
       const formik = useFormik({
         initialValues: {
           userEmail: "",
@@ -34,11 +36,14 @@ const Login = () => {
       const handleLogin = async() => {
         if(formik.values.user_type === "Admin"){
             try {
-                const response = await axios.get(`http://localhost:4000/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
+                const response = await axios.get(`http://localhost:4000/loginRoutes/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
                 
-                if(response.data.length > 0) {
+console.log('response ------', JSON.stringify(response.data));
 
-                    const userInfo = JSON.stringify(response.data[0]);
+
+                if(response.data) {
+
+                    const userInfo = JSON.stringify(response.data);
                     localStorage.setItem('user', userInfo);
                     navigate('/admin');
                 }
@@ -56,11 +61,11 @@ const Login = () => {
         }
         if(formik.values.user_type === "Student") {
             try {
-                const response = await axios.get(`http://localhost:4000/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
+                const response = await axios.get(`http://localhost:4000/loginRoutes/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
                 
-                if(response.data.length > 0) {
+                if(response.data) {
 
-                    const userInfo = JSON.stringify(response.data[0]);
+                    const userInfo = JSON.stringify(response.data);
                     const headerClass = "studentHeader";
                     localStorage.setItem('user', userInfo);
                     localStorage.setItem('headerClass', headerClass);

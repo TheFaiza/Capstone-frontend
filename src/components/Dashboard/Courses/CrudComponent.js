@@ -24,7 +24,7 @@ const CrudComponent = (props) => {
         onSubmit: async (values, { setSubmitting  }) => {
             if(editCrud === "update") {
                 try {
-                    await axios.put(`http://localhost:4200/courses/${props.idToEdit}`, values)
+                    await axios.put(`http://localhost:4000/courseRoutes/${props.idToEdit}`, values)
                     .then((response) => {
                         props.closeCrud();
                     })
@@ -36,7 +36,7 @@ const CrudComponent = (props) => {
             }
             else {
                 try {
-                    await axios.post(`http://localhost:4200/courses`, values)
+                    await axios.post(`http://localhost:4000/courseRoutes`, values)
                     .then((response) => {
                         props.closeCrud();
                     })
@@ -53,7 +53,7 @@ const CrudComponent = (props) => {
     const [editCrud, setEditCrud] = useState("");
     const getEditData = async() => {
         try {
-            const update = await axios.get(`http://localhost:4200/courses?id=${props.idToEdit}`);
+            const update = await axios.get(`http://localhost:4000/courseRoutes?id=${props.idToEdit}`);
             formik.setValues(update.data[0]);
             setEditCrud("update");
         } catch (e) {

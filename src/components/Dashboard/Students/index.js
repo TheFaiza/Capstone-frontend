@@ -83,7 +83,7 @@ const Students = () => {
 
     const refreshList = async () => {
         try {
-           const response = await axios.get(`http://localhost:4200/students`);
+           const response = await axios.get(`http://localhost:4000/studentRoutes`);
            setDataList(response.data);
         } catch (e) {
            console.log(`problem refreshing list`+e); 

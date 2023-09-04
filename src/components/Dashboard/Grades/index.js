@@ -70,7 +70,7 @@ const Grades = () => {
 
     const refreshList = async () => {
         try {
-           const response = await axios.get(`http://localhost:4200/grades`);
+           const response = await axios.get(`http://localhost:4000/gradeRoutes`);
            setDataList(response.data);
         } catch (e) {
            console.log(`problem refreshing list`+e); 

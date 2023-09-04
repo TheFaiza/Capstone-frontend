@@ -70,7 +70,7 @@ const Courses = () => {
 
     const refreshList = async () => {
         try {
-           const response = await axios.get(`http://localhost:4200/courses`);
+           const response = await axios.get(`http://localhost:4000/courseRoutes`);
            setDataList(response.data);
         } catch (e) {
            console.log(`problem refreshing list`+e); 
