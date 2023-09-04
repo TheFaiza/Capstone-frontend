@@ -4,13 +4,14 @@ import "./Student.scss";
 
 const SideBar = () => {
   const navigate = useNavigate();
+
   const handleLogout = () => {
-    
     const userDataString = localStorage.removeItem('user');
     localStorage.removeItem('headerClass');
     navigate('/');
     console.log("userDataString:", userDataString)
   }
+  
   return (
     <div className="sidebar">
       <ul className='sidebar-links'>
