@@ -16,7 +16,7 @@ const SideBar = () => {
     <div className="sidebar">
       <ul className='sidebar-links'>
         <li>
-          <NavLink to="/student/profile" activeclassname="active" exact="true">
+          <NavLink to="/student" activeclassname="active" exact="true">
             Profile
           </NavLink>
         </li>

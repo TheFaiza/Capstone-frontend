@@ -5,7 +5,7 @@ import TableHeader from "../../TableHeader/TableHeader";
 import CrudComponent from "./CrudComponent";
 import axios from "axios";
 import DeleteModal from "../../DeleteModal";
-
+import CoursesList from "./CoursesList";
 
 
 const Students = () => {
@@ -45,6 +45,7 @@ const Students = () => {
               <div>
                 <button onClick={() => handleEdit(row)}>Edit</button>
                 <button onClick={() => handleDelete(row)}>Delete</button>
+                <button onClick={() => handleCourses(row)}>View Courses</button>
               </div>
             ),
           },
@@ -60,6 +61,8 @@ const Students = () => {
     const [idToEdit, setIdToEdit] = useState();
     const [idToDelete, setIdToDelete] = useState();
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [courseListId, setCourseListId] = useState();
+    const [openCourseList, setOpenCourseList] = useState(false);
 
     const crudStart = () => {
         setSettings({
@@ -74,11 +77,13 @@ const Students = () => {
             ...settings,
             crudMode: "",
             isCrudStart: false,
-            showBtn: true
+            showBtn: true,
         })
         refreshList();
         setIdToEdit("");
         setIdToDelete("");
+        setOpenCourseList(false);
+        setCourseListId("");
     }
 
     const refreshList = async () => {
@@ -114,6 +119,15 @@ const Students = () => {
     const handleCancel = () => {
         setIsDeleteModalVisible(false);
     };
+    const handleCourses = (row) => {
+        setSettings({
+            ...settings,
+            crudMode: "view",
+            showBtn: false
+        });
+        setCourseListId(row.original.id);
+        setOpenCourseList(true);
+    }
    
    
     return(
@@ -124,6 +138,8 @@ const Students = () => {
                     ? 'Add Student'
                     : settings.crudMode === "update"
                     ? 'Update Student'
+                    : settings.crudMode === "view"
+                    ? 'Assigned Courses'
                     : 'Students' 
                 }
                 showAddBtn={settings.showBtn}
@@ -136,6 +152,12 @@ const Students = () => {
                     <CrudComponent 
                       closeCrud={closeCrud}
                       idToEdit={idToEdit}  
+                    />
+                </>
+            ) : openCourseList ? (
+                <>
+                    <CoursesList 
+                    courseListId={courseListId}
                     />
                 </>
             ) : (
@@ -156,6 +178,7 @@ const Students = () => {
                     api_endpoint={`students`}
                 />
             )}
+           
             
         </div>
     )

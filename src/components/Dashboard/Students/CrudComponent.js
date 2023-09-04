@@ -32,8 +32,9 @@ const CrudComponent = (props) => {
         }),
         onSubmit: async (values, { setSubmitting  }) => {
             if(editCrud === "update") {
+                
                 try {
-                    await axios.put(`http://localhost:4000/studentRoutes/${props.idToEdit}`, values)
+                    await axios.patch(`http://localhost:4000/studentRoutes/${props.idToEdit}`, values)
                     .then((response) => {
                         props.closeCrud();
                     })
@@ -62,8 +63,8 @@ const CrudComponent = (props) => {
     const [editCrud, setEditCrud] = useState("");
     const getEditData = async() => {
         try {
-            const update = await axios.get(`http://localhost:4000/studentRoutes?id=${props.idToEdit}`);
-            formik.setValues(update.data[0]);
+            const response = await axios.get(`http://localhost:4000/studentRoutes/${props.idToEdit}`);
+            formik.setValues(response.data);
             setEditCrud("update");
         } catch (e) {
             console.log(`Data was not fetched properly${e}`);

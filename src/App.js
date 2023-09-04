@@ -13,6 +13,7 @@ import Student from "./pages/Student";
 import Admin from "./pages/Admin";
 import AdminSideBar from "./pages/Admin/AdminSideBar";
 import SideBar from "./pages/Student/SideBar";
+import StudentCourses from "./pages/Student/StudentCourses";
 
 function App() {
   const location = useLocation();
