@@ -44,7 +44,7 @@ function App() {
 
               <Route path='/student' element={<StudentProfile />} />
               <Route path='/student/courses' element={<StudentAssignCourse />} />
-              <Route path='/student/grades' element={<StudentAssignGrade />} />
+              <Route path='/student/studentAssignGrades' element={<StudentAssignGrade />} />
               
               <Route path='/register' element={<Register />} />
               <Route path='/forgot-password' element={<ForgotPassword />} />

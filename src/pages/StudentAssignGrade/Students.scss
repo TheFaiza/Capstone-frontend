@@ -1,0 +1,145 @@
+@use "../../styles/partials/colors" as *;
+@use "../../styles/partials/mixins" as *;
+
+.students-holder {
+
+.form-holder {
+    max-width: 740px;
+    margin: 0px auto !important;
+    background: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px 15px;
+    h2 {
+        font-size: 20px;
+        padding: 0px 0 15px;
+        margin: 0px;
+    }
+}
+.flex {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 15px;
+}
+.form-row {
+    padding: 0 0 15px;
+    box-sizing: border-box;
+    max-width:640px;
+    margin: 0 auto;
+    &.links {
+        display: flex;
+        gap: 10px;
+        justify-content: start;
+        flex-wrap:  wrap;
+        label {
+            display: flex;
+            align-items: center;
+            padding-right: 10px;
+        }
+        span {
+            padding-right: 10px;
+        }
+    }
+    a {
+        font-size: 16px;
+        display: inline-block;
+        margin-right: 10px;
+        font-weight: bold;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    &.clist {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #f3f3f3;
+        &:nth-child(even) {
+            background: #F7F8F9;
+        }
+        .assign-grade {
+            text-align: left;
+            min-width: 200px;
+        }
+    }
+    input[type="checkbox"] {
+        display: none;
+      }
+  
+      .custom-checkbox {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        cursor: pointer;
+        position: relative;
+        margin: 0 10px -4px 0;
+      }
+  
+      .custom-label {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+  
+      input[type="checkbox"]:checked + .custom-checkbox::before {
+        content: '\2713'; 
+        font-size: 16px;
+        color: green;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+}
+.input-field {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 5px !important;
+    border:1px solid #BDC5D5;
+}
+.text-area {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    height: 100px;
+    resize:  none;
+    border-radius: 5px !important;
+    border:1px solid #BDC5D5;
+}
+.submit-btn {
+    background: $Instock-Indigo;
+    padding: 10px 30px;
+    height: initial;
+    width: initial;
+    font-size: 16px;
+    border-radius: 25px;
+    color: $White;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        background: $Cloud;
+        color: $Instock-Black;
+        border: none;
+    }
+}
+ul.login-links {
+    display: block;
+    margin: 0;
+    padding:  0;
+    li {
+        display: block;
+        padding: 0 0 10px;
+        span {
+            padding-right: 10px;
+        }
+    }
+}
+
+}

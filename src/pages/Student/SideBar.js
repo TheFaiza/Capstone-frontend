@@ -26,7 +26,7 @@ const SideBar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/student/grades" activeclassname="active">
+          <NavLink to="/student/studentAssignGrades" activeclassname="active">
             Grades
           </NavLink>
         </li>

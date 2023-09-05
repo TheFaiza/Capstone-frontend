@@ -3,11 +3,12 @@ import { Formik, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const StudentCourses = () => {
 
+const CoursesList = (props) => {
+    
     const userInfoString = localStorage.getItem('user');
     const userInfo = JSON.parse(userInfoString);
-    const [studentId, setStudentId] = useState(userInfo.id);
+    const [studentId, setStudentId] = useState(props.courseListId);
 
     const [firstTimeSelected, setFirstTimeSelected] = useState(false);
     const [updatedCourseList, setUpdatedCourseList] = useState(false);
@@ -24,6 +25,7 @@ const StudentCourses = () => {
         onSubmit: async (values, { setSubmitting  }) => {
             try {
                 const checkCourses = await axios.get(`http://localhost:4000/courseRoutes/assignedCourses?student_id=${studentId}`);
+                
                 if(checkCourses.data.length > 0) {
                     const courseToUpdate = checkCourses.data[0].id;
                     try {
@@ -89,16 +91,19 @@ const StudentCourses = () => {
             console.log(error)
         }
     }
+
+    
     useEffect(() => {
         getCourses();
-        setStudentId(userInfo.id);
+        setStudentId(props.courseListId);
         getAlreadySelected();
     }, [])
-    
+
+
+
     return (
-        <div className="single-stdent">
-        <h2>Student Dashboard</h2>
-        <form onSubmit={formik.handleSubmit}>
+        <div className="student-courses">
+            <form onSubmit={formik.handleSubmit}>
         <div className="student-dashboard">
             
             <div className="courses-col">
@@ -114,7 +119,7 @@ const StudentCourses = () => {
                 {courses.map((course) => {
                      
                     return (
-                        <div className="form-row" key={course.id}>
+                        <div className="form-row clist" key={course.id}>
                             <label className="custom-label">
                             <input
                             type="checkbox"
@@ -125,6 +130,25 @@ const StudentCourses = () => {
                                 <span className="custom-checkbox"></span> 
                                 {course.name}
                             </label>
+                            <div className="assign-grade">
+                                <h4>Assign Grade</h4>
+                                <select
+                                    id="selectedOption"
+                                    name="selectedOption"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.selectedOption}
+                                >
+                                    <option value="" disabled>
+                                    Select a grade
+                                    </option>
+                                    <option>Grade 01</option>
+                                    <option>Grade 02</option>
+                                    <option>Grade 03</option>
+                                    <option>Grade 04</option>
+                                    
+                                </select>
+                            </div>
                         </div>
                     )
                 })}
@@ -140,4 +164,5 @@ const StudentCourses = () => {
     )
 }
 
-export default StudentCourses;
+
+export default CoursesList;
