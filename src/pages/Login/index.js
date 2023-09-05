@@ -37,10 +37,7 @@ const Login = () => {
         if(formik.values.user_type === "Admin"){
             try {
                 const response = await axios.get(`http://localhost:4000/loginRoutes/login?email=${formik.values.userEmail}&password=${formik.values.password}&user_type=${formik.values.user_type}`);
-                
-console.log('response ------', JSON.stringify(response.data));
-
-
+   
                 if(response.data) {
 
                     const userInfo = JSON.stringify(response.data);

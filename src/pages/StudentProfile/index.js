@@ -1,18 +1,32 @@
-import React from "react";
-import './Register.scss';
-import { Link, useNavigate  } from "react-router-dom";
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import "./Student.scss";
 import { Formik, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const Register = () => {
-    
+const Student = (props) => {
+
     const [successMsg, setSuccessMsg] = useState(false);
-    const [errorMsg, setErrorMsg] = useState(false);
-    const navigate = useNavigate();
+    const [editCrud, setEditCrud] = useState("");
+
+    const getEditData = async() => {
+
+        let userStorageData = localStorage.getItem('user');
+        let loginUserData = JSON.parse(userStorageData);
+        let loginUserId = loginUserData.id;
+
+        try {
+            const response = await axios.get(`http://localhost:4000/studentRoutes/${loginUserId}`);
+            formik.setValues(response.data);
+            setEditCrud("update");
+        } catch (e) {
+            console.log(`Data was not fetched properly${e}`);
+        }
+    }
+
 
     const formik = useFormik({
+
         initialValues: {
             name: "",
             email: "",
@@ -32,38 +46,50 @@ const Register = () => {
             password: Yup.string()
             .required(`Required`)
         }),
-        onSubmit: async (values, { setSubmitting  }) => {
+        onSubmit: async (values) => {
 
             values.user_type = "Student";
 
+            console.log('values -----', values);
+
+            let userStorageData = localStorage.getItem('user');
+            let loginUserData = JSON.parse(userStorageData);
+            let loginUserId = loginUserData.id;
+
             if(values.user_type === "Student") {
                 try {
-                const response =  await axios.post(`http://localhost:4000/studentRoutes`, values);
-                setSuccessMsg(true);
-                setTimeout(() => {
-                    setSuccessMsg(false);
-                    navigate('/');
-                }, 1500);
+                    await axios.patch(`http://localhost:4000/studentRoutes/${loginUserId}`, values);
+                    setSuccessMsg(true);
                 
                 } catch (error) {
                     console.error(`Error posting students data`, values);
-                } finally {
-                    setSubmitting(false);
                 }
             }
             
         }
     })
-  
+
+    useEffect(() => {
+
+        let userStorageData = localStorage.getItem('user');
+        let loginUserData = JSON.parse(userStorageData);
+        let loginUserId = loginUserData.id;
+
+        if(loginUserId) {
+            getEditData();
+        }
+    }, [])
+   
     return(
-        <div className="register-holder">
+        <div className="students-holder">
+
             <div className="form-holder">
                 <form onSubmit={formik.handleSubmit}>
-                    <h2>Please provide register information!</h2>
-                    {successMsg && (
+                <h2>Please provide student information! </h2>
+                {successMsg && (
                         <div className="success">You have been registered successfully as a student. Please login now.</div>
                     )}
-                    <div className="flex">
+                <div className="flex">
                     <div className="form-row">
                         <input 
                             type="text" 
@@ -71,7 +97,7 @@ const Register = () => {
                             className="input-field"
                             name="name"
                             onChange={formik.handleChange}
-                            onBlur={formik.handleBlur} 
+                            onBlur={formik.handleBlur}
                             value={formik.values.name} 
                         />
                         {formik.errors.name && formik.touched.name &&  
@@ -86,7 +112,7 @@ const Register = () => {
                         className="input-field"
                         name="email"
                         onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
+                            onBlur={formik.handleBlur}
                         value={formik.values.email} 
                     />
                     {formik.errors.email && formik.touched.email && 
@@ -151,7 +177,7 @@ const Register = () => {
                     placeholder="Address"
                     name="address"
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                            onBlur={formik.handleBlur}
                     value={formik.values.address}
                     ></textarea>
                 </div>
@@ -162,19 +188,13 @@ const Register = () => {
                         value={formik.values.user_type}
                     />
                 </div>
-                    <div className="form-row">
-                        <ul className="login-links">
-                            <li><span>Already have an account?</span><Link to="/">Login</Link></li>
-                        </ul>
-                        
-                    </div>
-                    <div className="form-row">
-                        <button className="submit-btn">Submit</button>
-                    </div>
-                </form>
+                <div className="form-row">
+                    <input type="submit" value={'Submit'} className="submit-btn" />
+                </div>
+           </form>   
             </div>
-        </div>
+          </div>
     )
 }
 
-export default Register;
+export default Student;

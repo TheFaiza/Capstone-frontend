@@ -10,16 +10,19 @@ import Courses from "./components/Dashboard/Courses";
 import Grades from "./components/Dashboard/Grades";
 import { useState } from "react";
 import Student from "./pages/Student";
+import StudentProfile from "./pages/StudentProfile";
+import StudentAssignCourse from "./pages/StudentAssignCourse";
+import StudentAssignGrade from "./pages/StudentAssignGrade";
 import Admin from "./pages/Admin";
 import AdminSideBar from "./pages/Admin/AdminSideBar";
 import SideBar from "./pages/Student/SideBar";
-import StudentCourses from "./pages/Student/StudentCourses";
+
 
 function App() {
   const location = useLocation();
   const isLoginRoute = location.pathname === '/';
   const isAdminRoute = window.location.pathname.startsWith('/admin');
-  const isStudentRoute = location.pathname === '/student';
+  const isStudentRoute =  window.location.pathname.startsWith('/student');
 
   return (
     <div className="App">
@@ -36,7 +39,9 @@ function App() {
               <Route path='/admin/courses' element={<Courses />} />
               <Route path='/admin/grades' element={<Grades />} />
 
-              <Route path='/student' element={<Student />} />
+              <Route path='/student' element={<StudentProfile />} />
+              <Route path='/student/courses' element={<StudentAssignCourse />} />
+              <Route path='/student/grades' element={<StudentAssignGrade />} />
               
               <Route path='/register' element={<Register />} />
               <Route path='/forgot-password' element={<ForgotPassword />} />

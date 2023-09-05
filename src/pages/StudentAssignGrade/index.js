@@ -1,16 +1,10 @@
-import React from "react";
-import './Register.scss';
-import { Link, useNavigate  } from "react-router-dom";
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import "./Student.scss";
 import { Formik, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 
-const Register = () => {
-    
-    const [successMsg, setSuccessMsg] = useState(false);
-    const [errorMsg, setErrorMsg] = useState(false);
-    const navigate = useNavigate();
+const Student = (props) => {
 
     const formik = useFormik({
         initialValues: {
@@ -18,33 +12,41 @@ const Register = () => {
             email: "",
             password: "",
             mobile: "",
-            user_type: "",
+            user_type: "Student",
             address: "",
             country: "",
             city: ""
         },
         validationSchema: Yup.object().shape({
             name: Yup.string()
-            .required(`Required`),
+              .required(`Required`),
             email: Yup.string()
-            .email(`Invalid email address`)
-            .required(`Required`),
+              .email(`Invalid email address`)
+              .required(`Required`),
             password: Yup.string()
-            .required(`Required`)
+              .min(6)
+              .required(`Required`)
         }),
         onSubmit: async (values, { setSubmitting  }) => {
-
-            values.user_type = "Student";
-
-            if(values.user_type === "Student") {
-                try {
-                const response =  await axios.post(`http://localhost:4000/studentRoutes`, values);
-                setSuccessMsg(true);
-                setTimeout(() => {
-                    setSuccessMsg(false);
-                    navigate('/');
-                }, 1500);
+            if(editCrud === "update") {
                 
+                try {
+                    await axios.patch(`http://localhost:4000/studentRoutes/${props.idToEdit}`, values)
+                    .then((response) => {
+                        props.closeCrud();
+                    })
+                } catch (error) {
+                    console.error(`Error posting students data`, values);
+                } finally {
+                    setSubmitting(false);
+                }
+            }
+            else {
+                try {
+                    await axios.post(`http://localhost:4000/studentRoutes`, values)
+                    .then((response) => {
+                        props.closeCrud();
+                    })
                 } catch (error) {
                     console.error(`Error posting students data`, values);
                 } finally {
@@ -54,16 +56,31 @@ const Register = () => {
             
         }
     })
-  
+
+    const [editCrud, setEditCrud] = useState("");
+    const getEditData = async() => {
+        try {
+            const response = await axios.get(`http://localhost:4000/studentRoutes/${props.idToEdit}`);
+            formik.setValues(response.data);
+            setEditCrud("update");
+        } catch (e) {
+            console.log(`Data was not fetched properly${e}`);
+        }
+    }
+
+    useEffect(() => {
+        if(props.idToEdit) {
+            getEditData();
+        }
+    }, [])
+   
     return(
-        <div className="register-holder">
+        <div className="students-holder">
+
             <div className="form-holder">
                 <form onSubmit={formik.handleSubmit}>
-                    <h2>Please provide register information!</h2>
-                    {successMsg && (
-                        <div className="success">You have been registered successfully as a student. Please login now.</div>
-                    )}
-                    <div className="flex">
+                <h2>Please provide student information!</h2>
+                <div className="flex">
                     <div className="form-row">
                         <input 
                             type="text" 
@@ -162,19 +179,13 @@ const Register = () => {
                         value={formik.values.user_type}
                     />
                 </div>
-                    <div className="form-row">
-                        <ul className="login-links">
-                            <li><span>Already have an account?</span><Link to="/">Login</Link></li>
-                        </ul>
-                        
-                    </div>
-                    <div className="form-row">
-                        <button className="submit-btn">Submit</button>
-                    </div>
-                </form>
+                <div className="form-row">
+                    <input type="submit" value={'Submit'} className="submit-btn" />
+                </div>
+           </form>   
             </div>
-        </div>
+          </div>
     )
 }
 
-export default Register;
+export default Student;
