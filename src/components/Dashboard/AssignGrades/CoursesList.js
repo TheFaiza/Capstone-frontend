@@ -108,29 +108,29 @@ const CoursesList = (props) => {
             
             <div className="courses-col">
                 <div className="form-row">
-                 <h3>Student Assign courses</h3>
-                 {/* {firstTimeSelected && (
+                 <h3>Please select courses</h3>
+                 {firstTimeSelected && (
                     <div className="success">Your courses are added.</div>
                  )}
                  {updatedCourseList && (
                     <div className="success">Your courses are updated.</div>
-                 )} */}
+                 )}
                 </div>
                 {courses.map((course) => {
                      
                     return (
                         <div className="form-row clist" key={course.id}>
                             <label className="custom-label">
-                            {/* <input
+                            <input
                             type="checkbox"
                             name={`courses.${course.id}`}
                             checked={formik.values.course_ids.includes(course.id)}
                             onChange={() => handleCheckboxChange(course.id)}
-                            /> */}
-                                {/* <span className="custom-checkbox"></span>  */}
+                            />
+                                <span className="custom-checkbox"></span> 
                                 {course.name}
                             </label>
-                            {/* <div className="assign-grade">
+                            <div className="assign-grade">
                                 <h4>Assign Grade</h4>
                                 <select
                                     id="selectedOption"
@@ -148,15 +148,15 @@ const CoursesList = (props) => {
                                     <option>Grade 04</option>
                                     
                                 </select>
-                            </div> */}
+                            </div>
                         </div>
                     )
                 })}
                 
             </div>
-            {/* <div className="form-row">
+            <div className="form-row">
                 <input type="submit" value="Save" className="submit-btn" />
-            </div> */}
+            </div>
             
         </div>
         </form>

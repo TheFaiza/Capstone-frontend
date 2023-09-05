@@ -8,6 +8,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Students from "./components/Dashboard/Students";
 import Courses from "./components/Dashboard/Courses";
 import Grades from "./components/Dashboard/Grades";
+import AssignGrades from "./components/Dashboard/AssignGrades";
+
 import { useState } from "react";
 import Student from "./pages/Student";
 import StudentProfile from "./pages/StudentProfile";
@@ -38,6 +40,7 @@ function App() {
               <Route path='/admin/students' element={<Students />} />
               <Route path='/admin/courses' element={<Courses />} />
               <Route path='/admin/grades' element={<Grades />} />
+              <Route path='/admin/assignGrades' element={<AssignGrades />} />
 
               <Route path='/student' element={<StudentProfile />} />
               <Route path='/student/courses' element={<StudentAssignCourse />} />

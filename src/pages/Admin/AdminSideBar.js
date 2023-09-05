@@ -31,6 +31,11 @@ const AdminSideBar = () => {
             Grades
           </NavLink>
         </li>
+        <li>
+          <NavLink to="admin/assignGrades" activeclassname="active">
+            Assign Grades
+          </NavLink>
+        </li>
       </ul>
       <div className="logout-link">
         <Link to="/admin">Profile</Link>

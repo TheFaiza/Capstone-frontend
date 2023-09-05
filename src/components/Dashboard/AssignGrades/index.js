@@ -8,36 +8,23 @@ import DeleteModal from "../../DeleteModal";
 import CoursesList from "./CoursesList";
 
 
-const Students = () => {
+const AssignGrade = () => {
     const columns = [
-        
         {
-            Header: "ID",
-            accessor: "id"
+            Header: "Student Name",
+            accessor: "student_name"
         },
         {
-            Header: "Name",
-            accessor: "name"
+            Header: "Course Name",
+            accessor: "course_name"
         },
         {
-            Header: "Email",
-            accessor: "email"
+            Header: "Course Code",
+            accessor: "course_code"
         },
         {
-            Header: "Mobile",
-            accessor: "mobile"
-        },
-        {
-            Header: "Country",
-            accessor: "country"
-        },
-        {
-            Header: "City",
-            accessor: "city"
-        },
-        {
-            Header: "Address",
-            accessor: "address"
+            Header: "Grade",
+            accessor: "student_grade"
         },
         {
             Header: 'Actions',
@@ -46,7 +33,6 @@ const Students = () => {
               <div>
                 <button onClick={() => handleEdit(row)}>Edit</button>
                 <button onClick={() => handleDelete(row)}>Delete</button>
-                <button onClick={() => handleCourses(row)}>View Courses</button>
               </div>
             ),
           },
@@ -55,7 +41,7 @@ const Students = () => {
     const [settings, setSettings] = useState({
         crudMode: "",
         isCrudStart: false,
-        btnText: "Add Student",
+        btnText: "Add Student Grade",
         showBtn: true,
     });
     const [dataList, setDataList] = useState([]);
@@ -80,16 +66,16 @@ const Students = () => {
             isCrudStart: false,
             showBtn: true,
         })
-        refreshList();
+        studentGradeList();
         setIdToEdit("");
         setIdToDelete("");
         setOpenCourseList(false);
         setCourseListId("");
     }
 
-    const refreshList = async () => {
+    const studentGradeList = async () => {
         try {
-           const response = await axios.get(`http://localhost:4000/studentRoutes`);
+           const response = await axios.get(`http://localhost:4000/studentGradeListRoutes`);
            setDataList(response.data);
         } catch (e) {
            console.log(`problem refreshing list`+e); 
@@ -97,7 +83,7 @@ const Students = () => {
     }
 
     useEffect(()=> {
-        refreshList();
+        studentGradeList();
     }, []);
 
     const handleEdit = (row) => {
@@ -136,12 +122,12 @@ const Students = () => {
             <TableHeader 
                 HeadingTxt={
                     settings.crudMode === "create" 
-                    ? 'Add Student'
+                    ? 'Add Student Grade'
                     : settings.crudMode === "update"
-                    ? 'Update Student'
+                    ? 'Update Student Grade'
                     : settings.crudMode === "view"
                     ? 'Assigned Courses'
-                    : 'Students' 
+                    : 'Student Grades' 
                 }
                 showAddBtn={settings.showBtn}
                 crudStart={crudStart}
@@ -187,4 +173,4 @@ const Students = () => {
 
 }
 
-export default Students;
+export default AssignGrade;
